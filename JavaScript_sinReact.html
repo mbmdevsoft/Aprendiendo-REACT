@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendiendo REACT</title>
+    <style>
+        img {
+            border-radius: 50%;
+            box-shadow: 0 0 25px grey;
+            width: 100px;
+        }
+        img.disabled{
+            opacity: .3;
+        }
+
+        picture {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Mujeres en la tecnologia</h1>
+    <div id="app">
+
+    </div>
+    <script>
+
+        const $app=document.getElementById('app')
+        const Avatar = params =>{
+            const src=`https://randomuser.me/api/portraits/women/${params.id}.jpg`
+            return `
+            <picture>
+                <img src=${src} />
+               <em> ${params.name} </em>
+            </picture>
+            `;
+        }
+        $app.innerHTML += Avatar({id:5,name:"Andrea"});
+        $app.innerHTML += Avatar({id:6,name:"Mónica"});
+
+        $app.querySelectorAll("img").forEach(
+            img =>{ img.addEventListener("click",() => {
+                img.classList.toggle("disabled");
+            });
+        });
+
+    
+    </script>
+</body>
+
+</html>

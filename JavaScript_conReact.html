@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendiendo REACT</title>
+    <style>
+        img {
+            border-radius: 50%;
+            box-shadow: 0 0 25px grey;
+            width: 100px;
+        }
+        img.disabled{
+            opacity: .3;
+        }
+
+        picture {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 100px;
+        }
+    </style>
+       <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+       <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+       <!-- este scrip sirve para transformar las etiquetas en javascript ver "babeljs"-->
+       <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   
+</head>
+
+<body>
+    <h1>Mujeres en la tecnologia</h1>
+    <div id="app">
+
+    </div>
+    <script type="text/babel">
+        const $app=document.getElementById('app')
+        const useState =React.useState
+
+        /* funcion con nueva nomenclatura*/
+        const Avatar = props => {
+            const [enabled, setEnabled]=useState(true)
+            const src=`https://randomuser.me/api/portraits/women/${props.id}.jpg`;
+            const estilo1 = enabled ? "" : "disabled"
+
+            return (
+            <picture> 
+                <img
+                    onClick={()=>setEnabled(!enabled)} 
+                    className={estilo1} 
+                    src={src} />
+                {props.name}
+            </picture> 
+            );
+        };
+        
+        
+        /* Otra forma de crear funciones */
+        /* USO EXPLICADO DE ESTADOS*/
+        function Contador(){
+            const [contadorValue, actualizaContador] = useState(22);
+        /* otra forma de construir la constante:
+            
+        const contadorState = useState(23);
+            let contadorValue=contadorState[0];
+            let actualizaContador=contadorState[1];
+        */
+       const [numeroDeVeces, setNumeroDeVeces] =useState(0);
+
+
+            return(
+                <div>
+                    <br />
+                    <button 
+                        onClick={()=>{
+                            actualizaContador(contadorValue+1)
+                            setNumeroDeVeces(numeroDeVeces+1)
+                        }
+                     }>Boton incrementar</button>
+                    Contador:{contadorValue}
+                    <button 
+                        onClick={()=>{
+                            actualizaContador(contadorValue-1)
+                            setNumeroDeVeces(numeroDeVeces+1)
+                    }
+                                          }>Boton decrementar</button>
+                    Numero de veces:{numeroDeVeces}
+                </div>
+            )
+        }
+
+
+        ReactDOM.render(
+        <div>
+            <Avatar id={10} name="monica" />
+            <Avatar id={11} name='pepa'/>
+            <Contador />
+        </div>,
+        $app
+        );
+
+
+    
+    </script>
+</body>
+
+</html>
